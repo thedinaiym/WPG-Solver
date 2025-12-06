@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # 1. Сервер Python
+  backend:
+    build: ./backend
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./backend:/app
+      # Пробрасываем Lean внутрь контейнера, чтобы Python мог его вызывать
+      - ./formal_verification:/app/formal_verification
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+
+  # 2. Фронтенд (React)
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+  # 3. Кэш (Redis) - для скорости!
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
