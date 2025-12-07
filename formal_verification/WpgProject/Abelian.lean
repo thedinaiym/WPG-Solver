@@ -1,14 +1,11 @@
-import Mathlib.Algebra.Group.Basic
-import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Abel
+import Mathlib.Tactic.Group
 
--- Объявляем пространство имен (чтобы не путаться)
-namespace Wpg.Abelian
+-- Создаем пространство имен для нашего проекта
+namespace WpgProject
 
--- ТЕОРЕМА: В коммутативной группе (a * b)^2 = a^2 * b^2
--- Python пришлет нам утверждение, а Lean его проверит.
-theorem square_mul_comm {G : Type*} [CommGroup G] (a b : G) :
-  (a * b)^2 = a^2 * b^2 := by
-  -- Это магия Lean. Тактика 'group' умеет решать такие равенства.
-  group
+-- Этот файл пустой, потому что Python будет генерировать доказательства
+-- во временных файлах. Но нам нужно импортировать тактику `abel`,
+-- чтобы она была скомпилирована и готова к работе.
 
-end Wpg.Abelian
+end WpgProject
